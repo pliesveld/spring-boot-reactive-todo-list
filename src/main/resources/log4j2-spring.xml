@@ -6,7 +6,7 @@
 		<Property name="springweb">spring-web.log</Property>
 
 		<Property name="LOG_APP_LEVEL">WARN</Property>
-		<Property name="LOG_SPRING_LEVEL">DEBUG</Property>
+		<Property name="LOG_SPRING_LEVEL">WARN</Property>
 		<Property name="LOG_BEANS_LEVEL">WARN</Property>
 		<Property name="LOG_BEANS_CACHED_LEVEL">WARN</Property>
 		<Property name="LOG_MVC_LEVEL">WARN</Property>
@@ -50,17 +50,11 @@
 			<AppenderRef ref="CONSOLE"/>
 		</logger>
 
-		<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="INFO" additivity="false">
-			<AppenderRef ref="FileSpringWeb"/>
-		</logger>
 
-		<logger name="org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer" level="DEBUG" additivity="false">
-			<AppenderRef ref="FileSpringBootDebug"/>
-		</logger>
+		<!--<logger name="org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer" level="DEBUG" additivity="false">-->
+			<!--<AppenderRef ref="FileSpringBootDebug"/>-->
+		<!--</logger>-->
 
-		<logger name="org.springframework.web.servlet.mvc" level="${sys:LOG_MVC_LEVEL}" additivity="false">
-			<AppenderRef ref="CONSOLE_SPRING"/>
-		</logger>
 		<logger name="org.springframework.web.servlet.handler" level="${sys:LOG_MVC_LEVEL}" additivity="false">
 			<AppenderRef ref="CONSOLE_SPRING"/>
 		</logger>
