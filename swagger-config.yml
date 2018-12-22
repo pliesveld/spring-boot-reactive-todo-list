@@ -1,7 +1,0 @@
-modelPackage: test.model
-apiPackage: test.api
-configPackage: test.config
-sourceFolder: src/main/java
-hideGenerationTimestamp: true
-java8: true
-library: spring-boot

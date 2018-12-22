@@ -1,5 +1,12 @@
 ## list of generated files to ignore
 pom.xml
+README.md
+VERSION
+src/main/resources/application.properties
 
+## swagger-codegen does not currently support webflux
+## ignore all generated files
+src/main/java/hello/config/
+src/main/java/hello/api/
+src/main/java/hello/base/
 
-## list of files that have been ignored after generation

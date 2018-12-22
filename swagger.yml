@@ -30,7 +30,7 @@ paths:
         description: "List object that needs to be added to the store"
         required: true
         schema:
-          $ref: "#/definitions/List"
+          $ref: "#/definitions/TodoList"
       responses:
         405:
           description: "Invalid input"
@@ -52,7 +52,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/List"
+            $ref: "#/definitions/TodoList"
         400:
           description: "Invalid ID supplied"
         404:
@@ -99,13 +99,13 @@ paths:
         description: "List object that needs to be added to the store"
         required: true
         schema:
-          $ref: "#/definitions/List"
+          $ref: "#/definitions/TodoList"
       responses:
         405:
           description: "Invalid input"
 
 definitions:
-  ListItem:
+  TodoListItem:
     type: "object"
     properties:
       name:
@@ -117,7 +117,7 @@ definitions:
         enum:
         - "pending"
         - "completed"
-  List:
+  TodoList:
     type: "object"
     required:
     - "name"
@@ -131,7 +131,7 @@ definitions:
       items:
         type: "array"
         items:
-          $ref: "#/definitions/ListItem"
+          $ref: "#/definitions/TodoListItem"
 
   SearchListResponse:
     type: "object"

@@ -1,0 +1,10 @@
+{
+  "modelPackage": "hello.model",
+  "apiPackage": "hello.api",
+  "configPackage": "hello.config",
+  "basePackage": "hello.base",
+  "sourceFolder": "src/main/java",
+  "hideGenerationTimestamp": "true",
+  "java8": "true",
+  "library": "spring-boot"
+}
