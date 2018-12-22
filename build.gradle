@@ -32,10 +32,12 @@ allprojects {
     sourceCompatibility = 1.8
 
     repositories {
+        jcenter()
         mavenCentral()
         maven{ url { 'http://repo.springsource.org/libs-release/' }}
         maven{ url { 'http://repo.springsource.org/libs-milestone/' }}
         maven{ url { 'http://repo.springsource.org/libs-snapshot/' }}
+        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
     }
 
     checkstyle {
@@ -86,13 +88,15 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-validation")
     compile('org.springframework.boot:spring-boot-starter-json')
     compile('org.projectlombok:lombok')
+    compile group: 'io.projectreactor.ipc', name: 'reactor-netty', version: '0.7.12.RELEASE'
 
-	compile 'org.slf4j:slf4j-api:1.7.21'
+    compileOnly 'io.swagger:swagger-codegen-generators:1.0.0-rc1'
+
+    compile 'io.springfox:springfox-swagger2:3.0.0-SNAPSHOT'
+    compile 'io.springfox:springfox-swagger-ui:3.0.0-SNAPSHOT'
+    compile 'io.springfox:springfox-spring-webflux:3.0.0-SNAPSHOT'
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-
-
-    testCompile group: 'javax.inject', name: 'javax.inject', version: '1'
-    testCompile 'junit:junit:4.12'
-    testCompile 'pl.pragmatists:JUnitParams:1.1.0'
+    testCompile 'io.projectreactor:reactor-test:3.2.3.RELEASE'
 }
 
