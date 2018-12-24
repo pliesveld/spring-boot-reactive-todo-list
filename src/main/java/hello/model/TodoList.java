@@ -2,9 +2,12 @@ package hello.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,19 +17,21 @@ import java.util.Objects;
  * TodoList
  */
 @Validated
-
+@Document
 public class TodoList   {
   @JsonProperty("id")
-  private Long id = null;
+  @Id
+  private String id = null;
 
   @JsonProperty("name")
   private String name = null;
 
   @JsonProperty("items")
   @Valid
+  @NotEmpty
   private List<TodoListItem> items = null;
 
-  public TodoList id(Long id) {
+  public TodoList id(String id) {
     this.id = id;
     return this;
   }
@@ -38,11 +43,11 @@ public class TodoList   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -120,7 +125,6 @@ public class TodoList   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TodoList {\n");
-    
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");

@@ -1,14 +1,15 @@
-<Configuration xmlns:xi="http://www.w3.org/2001/XInclude" configDebug="false" monitorInterval="20" status="ERROR" name="CONFIG_DEV">
+<Configuration configDebug="false" monitorInterval="20" status="ERROR" name="CONFIG_DEV">
 	<Properties>
 		<Property name="logFolder">/tmp/log</Property>
 		<Property name="springbootdebug">spring-boot.log</Property>
 		<Property name="springdebug">spring-debug.log</Property>
 		<Property name="springweb">spring-web.log</Property>
 
-		<Property name="LOG_APP_LEVEL">WARN</Property>
-		<Property name="LOG_SPRING_LEVEL">WARN</Property>
-		<Property name="LOG_BEANS_LEVEL">WARN</Property>
-		<Property name="LOG_BEANS_CACHED_LEVEL">WARN</Property>
+		<Property name="LOG_APP_LEVEL">INFO</Property>
+		<Property name="LOG_SPRING_LEVEL">INFO</Property>
+		<Property name="LOG_BEANS_LEVEL">INFO</Property>
+		<Property name="LOG_BEANS_CACHED_LEVEL">INFO</Property>
+		<Property name="LOG_REACTOR_LEVEL">INFO</Property>
 		<Property name="LOG_MVC_LEVEL">WARN</Property>
 		<Property name="LOG_SECURITY_LEVEL">WARN</Property>
 
@@ -74,7 +75,11 @@
 			<AppenderRef ref="CONSOLE_SPRING"/>
 		</logger>
 
-		<Root level="WARN">
+		<logger name="reactor.Mono" level="${sys:LOG_REACTOR_LEVEL}" additivity="false">
+			<AppenderRef ref="CONSOLE_SPRING"/>
+		</logger>
+
+		<Root level="INFO">
 			<AppenderRef ref="CONSOLE"/>
 		</Root>
 	</Loggers>

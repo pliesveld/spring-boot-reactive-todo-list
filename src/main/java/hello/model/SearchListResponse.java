@@ -70,7 +70,6 @@ public class SearchListResponse   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SearchListResponse {\n");
-    
     sb.append("    lists: ").append(toIndentedString(lists)).append("\n");
     sb.append("}");
     return sb.toString();

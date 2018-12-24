@@ -52,11 +52,14 @@ allprojects {
 
 bootRun {
 	jvmArgs = [
-	    "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005",
+//	    "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005",
 	]
 }
 
+mainClassName = 'hello.Application'
+
 bootJar {
+    mainClassName = 'hello.Application'
     enabled = true
 }
 
@@ -87,6 +90,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
     compile("org.springframework.boot:spring-boot-starter-validation")
     compile('org.springframework.boot:spring-boot-starter-json')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
     compile('org.projectlombok:lombok')
     compile group: 'io.projectreactor.ipc', name: 'reactor-netty', version: '0.7.12.RELEASE'
 
@@ -97,6 +101,33 @@ dependencies {
     compile 'io.springfox:springfox-spring-webflux:3.0.0-SNAPSHOT'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('junit:junit')
+    testCompile 'io.rest-assured:rest-assured:3.2.0'
+//    testCompile group: 'io.rest-assured', name: 'spring-mock-mvc', version: '3.2.0'
+//    testCompile 'org.mockito:mockito-all:1.10.8'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
     testCompile 'io.projectreactor:reactor-test:3.2.3.RELEASE'
+    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+}
+
+task generate(type: JavaExec) {
+    description "Utility application for generating test data"
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'test.TodoListGenerator'
+    mainClassName = 'test.TodoListGenerator'
+    args = ["ENV", "GENERATE", "COUNT"]
+}
+
+task bench(type: Exec) {
+    outputs.file('./bench/bench.tsv')
+
+    commandLine("ab", "-n", "${requests}", "-c", "${concurrent}", "-g", "${plot}", "-e", "${csv}", "${url}").workingDir("./bench/")
+}
+
+task graph(type: Exec, dependsOn: bench) {
+    inputs.file('./bench/bench.tsv')
+    outputs.file('./bench/graphs/timeseries.jpg')
+
+    commandLine("gnuplot", "-c", "bench.gnuplot").workingDir("./bench/")
 }
 

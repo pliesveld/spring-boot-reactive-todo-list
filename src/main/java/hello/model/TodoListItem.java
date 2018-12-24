@@ -114,7 +114,6 @@ public class TodoListItem   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TodoListItem {\n");
-    
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
