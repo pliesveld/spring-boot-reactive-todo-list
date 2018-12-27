@@ -1,0 +1,6 @@
+mongo/
+src/
+bench/
+config/
+out/
+swagger*
