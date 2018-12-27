@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 @Validated
 
-public class TodoListItem   {
+public class TodoListItem {
   @JsonProperty("name")
   private String name = null;
 
@@ -22,7 +22,6 @@ public class TodoListItem   {
    */
   public enum StatusEnum {
     PENDING("pending"),
-    
     COMPLETED("completed");
 
     private String value;

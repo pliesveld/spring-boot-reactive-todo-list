@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 @Component
 @Getter
-public class TodoListGenerator{
+public class TodoListGenerator {
 
     private SentenceGenerator sentenceGenerator = new SentenceGenerator();
 
