@@ -27,6 +27,7 @@ allprojects {
     apply plugin: 'application'
     apply plugin: 'maven'
     apply plugin: 'checkstyle'
+    apply plugin: 'jacoco'
 
     targetCompatibility = 1.8
     sourceCompatibility = 1.8
@@ -133,3 +134,10 @@ task graph(type: Exec, dependsOn: bench) {
     commandLine("gnuplot", "-c", "bench.gnuplot").workingDir("./bench/")
 }
 
+
+test {
+    reports {
+        junitXml.enabled = false
+        html.enabled = true
+    }               
+}
