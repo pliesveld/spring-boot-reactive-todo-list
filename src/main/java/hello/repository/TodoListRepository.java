@@ -8,6 +8,6 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface TodoListRepository extends ReactiveCrudRepository<TodoList, String> {
-    @Query(value="{}", fields="{name : 1, _id : 1}")
+    @Query(value = "{}", fields = "{name : 1, _id : 1}")
     Flux<TodoList> findNameAndExcludeId();
 }
