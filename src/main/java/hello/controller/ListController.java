@@ -25,8 +25,11 @@ public class ListController {
 
     @GetMapping
     private Flux<TodoList> getAllLists() {
-        return todoListRepository.findAll();
+        return todoListRepository.findNameAndExcludeId();
     }
+
+    @GetMapping("/count")
+    private Mono<Long> getistCount() { return todoListRepository.count(); }
 
     @PostMapping
     private Mono<?> updateListById(@Valid @RequestBody TodoList list) {
@@ -48,6 +51,6 @@ public class ListController {
     @DeleteMapping("/{listId}")
     private Mono<?> deleteListById(@PathVariable String listId) {
         return todoListRepository.deleteById(listId);
-    }
+}
 
 }

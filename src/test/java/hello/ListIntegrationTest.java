@@ -5,6 +5,7 @@ import hello.model.TodoListItem;
 import io.restassured.RestAssured;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.ExtractableResponse;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +13,14 @@ import org.junit.runner.RunWith;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import io.restassured.RestAssured.*;
 import io.restassured.matcher.RestAssuredMatchers.*;
 import org.hamcrest.Matchers.*;
+import test.TodoListGenerator;
+import test.TodoListGeneratorProperties;
 
 import static org.hamcrest.Matchers.is;
 
@@ -25,6 +29,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import({TodoListGenerator.class, TodoListGeneratorProperties.class})
 public class ListIntegrationTest {
 
     @LocalServerPort
@@ -36,7 +41,7 @@ public class ListIntegrationTest {
     public void setUp() throws Exception {
         RestAssured.port = port;
         RestAssured.basePath = "";
-        request = RestAssured.given();
+        request = RestAssured.given().log().ifValidationFails().request().log().ifValidationFails().body(true);
     }
 
     @Test

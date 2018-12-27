@@ -50,13 +50,14 @@ allprojects {
     }
 }
 
+mainClassName = 'hello.Application'
+
 bootRun {
+    mainClassName = 'hello.Application'
 	jvmArgs = [
 //	    "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005",
 	]
 }
-
-mainClassName = 'hello.Application'
 
 bootJar {
     mainClassName = 'hello.Application'
@@ -110,12 +111,13 @@ dependencies {
     testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 }
 
-task generate(type: JavaExec) {
+task generate(dependsOn: 'classes', type: JavaExec) {
+    dependsOn classes
     description "Utility application for generating test data"
-    classpath = sourceSets.main.runtimeClasspath
     main = 'test.TodoListGenerator'
-    mainClassName = 'test.TodoListGenerator'
+    classpath = sourceSets.main.runtimeClasspath
     args = ["ENV", "GENERATE", "COUNT"]
+    println "Executing Test Data Generator..."
 }
 
 task bench(type: Exec) {
