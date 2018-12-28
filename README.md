@@ -63,7 +63,7 @@ You will need to install ab, and gnuplot.
 
 
 ```
-$ ./gradlew bench graph
+./gradlew bench graph
   
   > Task :bench 
   This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
@@ -133,3 +133,44 @@ The graph below was taken against localhost, with a mongo document collection of
 _The ab benchmarking tool was configured to send 1000 requests with atmost 10 in-flight._
 
 ![swagger contract](./docs/timeseries_10000_1000_10.jpg)
+
+
+
+# Helm Charts
+_The project contains kubernetes helm charts for deploying the application stack.  Before proceeding, verify that `docker`, `kubectl`, and `helm` have been configured._
+
+
+### Initialize Helm repositories
+_This project has a dependency on the mongo Helm chart, and must be installed with the following:_
+
+```
+helm dependency update
+```
+
+### Build Docker image
+_Build the Docker image with the following:_
+
+```
+./gradlew clean build test bootJar
+docker build -t todo/backend .
+```
+
+### Install Helm chart
+_Helm manages the kubernetes deployment manifests.  See the file [values.yaml](./values.yaml) for the configuration options that are available.  To install the application and the the stack, run the following:_
+
+```
+helm install --name todo .
+```
+
+### Acceptance tests with Helm test
+_The acceptance test stages verify database connectivity.  To run them, invoke the following helm command:_
+
+```
+helm test --cleanup todo
+RUNNING: todo-test-mongo-connection
+PASSED: todo-test-mongo-connection
+RUNNING: todo-test-connection
+PASSED: todo-test-connection
+```
+
+For more details, see the [helm tests charts](./templates/tests/) in the project.

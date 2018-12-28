@@ -56,8 +56,10 @@ mainClassName = 'hello.Application'
 bootRun {
     mainClassName = 'hello.Application'
 	jvmArgs = [
+	    "-Dserver.port=8081"
 //	    "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005",
 	]
+    environment "SPRING_DATA_MONGODB_URI", "mongodb://localhost:27017/test"
 }
 
 bootJar {
@@ -115,10 +117,9 @@ dependencies {
 task generate(dependsOn: 'classes', type: JavaExec) {
     dependsOn classes
     description "Utility application for generating test data"
-    main = 'test.TodoListGenerator'
+    main = 'test.TodoListGeneratorApplication'
     classpath = sourceSets.main.runtimeClasspath
     args = ["ENV", "GENERATE", "COUNT"]
-    println "Executing Test Data Generator..."
 }
 
 task bench(type: Exec) {

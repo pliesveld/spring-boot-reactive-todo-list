@@ -11,3 +11,4 @@ out
 .DS_Store
 .settings/
 bin/
+requirements.lock

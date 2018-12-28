@@ -3,25 +3,14 @@ package hello.config;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class ConfigTest {
-
-    @Test(expected = NoSuchBeanDefinitionException.class)
-    public void verifyMongoConfig() throws Exception {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        applicationContext.register(MongoConfig.class);
-        applicationContext.scan("hello.repository");
-        applicationContext.refresh();
-        assertThat(applicationContext.getBean(MongoConfig.class),nullValue());
-    }
-
     @Test
     public void verifyWebfluxConfig() throws Exception {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
